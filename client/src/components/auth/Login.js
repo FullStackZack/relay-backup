@@ -185,9 +185,6 @@ class Login extends Component {
                             </Box>
                         </form>
                         <br />
-                        <Link href="/dashboard" style={{ fontSize: 30 }}>
-                            {"Demo"}
-                        </Link>
                     </div>
                 </Grid>
             </Grid>
