@@ -1,42 +1,24 @@
-var bcrypt = require("bcryptjs");
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
-const userSchema = new mongoose.Schema({
-    firstName: {
-      type: String,
-      required: true
-    }, 
-    lastName: {
-      type: String,
-      required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
-
+// Create Schema
+const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-userSchema.pre('save', function (next) {
-    if (!this.password) {
-      console.log('models/user.js =======NO PASSWORD PROVIDED=======')
-      next()
-    } else {
-      console.log('models/user.js hashPassword in pre save');
-      // this.password = this.hashPassword(this.password)
-      this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10), null);
-
-      next()
-    }
-  })
-
-
-const User = mongoose.model("User", userSchema);
-module.exports = User   
+module.exports = User = mongoose.model("users", UserSchema);

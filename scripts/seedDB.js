@@ -33,8 +33,7 @@ const activitySeeds = [
 
 const userSeeds = [
   {
-    firstName: "Katie",
-    lastName: "Coston",
+    name: "Katie Coston",
     email: "kecoston",
     password: "testing123"
   }

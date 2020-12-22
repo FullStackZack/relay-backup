@@ -7,9 +7,20 @@ const routes = require("./routes")
 const app = express();
 const webpush= require("web-push")
 const PORT = process.env.PORT || 3001;
-// const bodyParser = require("body-parser")
+const bodyParser = require("body-parser")
 
 const cors = require("cors")
+
+const users = require("./routes/api/users");
+
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
+
+const db = require("./config/keys").mongoURI;
 
 // Passport
 app.use(passport.initialize())
@@ -44,15 +55,19 @@ app.use(function(req, res, next) {
 app.use(routes)
 
 // Connect to the Mongo DB
-mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://localhost/relay',
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false
-    }
-  );
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("MongoDB successfully connected"))
+  .catch(err => console.log(err));
+
+require("./config/passport")(passport);
+
+app.use("/api/users", users);
+
+
   
     //*****************Push notification Route *******************//
 const publicVapidKey ="BJxZEJV0NApSurj1ULkPZ6SoJmHwrUSR3-JyaZPhgillhEWA8OYPv_87MRSsHSHp7kxHYd3K4iwfkkQUo5YuFOg";
