@@ -20,7 +20,7 @@ app.use(
 );
 app.use(bodyParser.json());
 
-//const db = require("./config/keys").mongoURI;
+const db = require("./config/keys").mongoURI;
 
 // Passport
 app.use(passport.initialize())
@@ -56,7 +56,7 @@ app.use(routes)
 
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/relay-2020',
+  db || 'mongodb://localhost/relay-2020',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
