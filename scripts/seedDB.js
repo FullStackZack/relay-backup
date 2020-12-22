@@ -3,7 +3,7 @@ const db = require("../models/")
 
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/relay",
+  process.env.MONGODB_URI || "mongodb://localhost/relay-2020",
 );
 
 const contactSeeds = [
@@ -34,7 +34,7 @@ const activitySeeds = [
 const userSeeds = [
   {
     name: "Katie Coston",
-    email: "kecoston",
+    email: "kecoston@gmail.com",
     password: "testing123"
   }
 ]
