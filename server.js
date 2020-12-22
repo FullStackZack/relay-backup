@@ -55,13 +55,15 @@ app.use(function(req, res, next) {
 app.use(routes)
 
 // Connect to the Mongo DB
-mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
-  .then(() => console.log("MongoDB successfully connected"))
-  .catch(err => console.log(err));
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/relay-2020',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
 
 require("./config/passport")(passport);
 
